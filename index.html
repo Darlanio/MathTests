@@ -2,53 +2,53 @@
   <BODY>
   <HR>
     <CENTER>
-      <H1>
+      <H3>
         Multiplikation
-      </H1>
+      </H3>
     </CENTER>
   <HR>
     <CENTER>
       <TABLE>
         <TR>
-          <TD><H1>Time Elapsed with only correct answers: </H1></TD>
-          <TD ID="Elapsed"><H1>0 seconds</H1></TD>
+          <TD><H3>Time Elapsed with only correct answers: </H3></TD>
+          <TD ID="Elapsed"><H3>0 seconds</H3></TD>
         </TR>
         <TR>
-          <TD><H1>Correct answers in a row: </H1></TD>
-          <TD ID="Counter"><H1>0</H1></TD>
+          <TD><H3>Correct answers in a row: </H3></TD>
+          <TD ID="Counter"><H3>0</H3></TD>
         </TR>
         <TR>
-            <TD><H1>Best streak: </H1></TD>
-            <TD ID="Streak"><H1>0</H1></TD>
+            <TD><H3>Best streak: </H3></TD>
+            <TD ID="Streak"><H3>0</H3></TD>
         </TR>
         <TR>
-            <TD><H1>Time per answer: </H1></TD>
-            <TD ID="TimePerAnswer"><H1>0</H1></TD>
+            <TD><H3>Time per answer: </H3></TD>
+            <TD ID="TimePerAnswer"><H3>0</H3></TD>
         </TR>              
       </TABLE>
     </CENTER>
   <HR>
     <CENTER>
-    <FORM action="multiplikation.html">
+    <FORM action="index.html">
       <INPUT Id="Solution" TYPE="Hidden" VALUE="40">
       <TABLE>
         <TR>
           <TD ID="A">
-            <H1>8</H1>
+            <H3>8</H3>
           </TD>
           <TD ID="X">
-            <H1>x</H1>
+            <H3>x</H3>
           </TD>
           <TD ID="B">
-            <H1>5</H1>
+            <H3>5</H3>
           </TD>
           <TD ID="EqualSign">
-            <H1>=</H1>
+            <H3>=</H3>
           </TD>
           <TD>
-            <H1>
+            <H3>
               <INPUT Id="Answer" name="Answer" TYPE="number" autocomplete="off" VALUE="" onkeypress="return OnKeyPress(event)">
-            </H1>
+            </H3>
           </TD>
         </TR>
       </TABLE>
@@ -67,8 +67,8 @@ function GenerateNewQuestion()
   var b=Math.floor(Math.random() * 13);
   var solution = a * b;
 
-  document.getElementById("A").innerHTML="<H1>" + Number(a) + "</H1>";
-  document.getElementById("B").innerHTML="<H1>" + Number(b) + "</H1>";
+  document.getElementById("A").innerHTML="<H3>" + Number(a) + "</H3>";
+  document.getElementById("B").innerHTML="<H3>" + Number(b) + "</H3>";
   document.getElementById("Solution").value=solution;
 }
 
@@ -79,17 +79,17 @@ function OnKeyPress(e)
     {
         counter++;
         if(streak<counter) streak=counter;
-        document.getElementById("Streak").innerHTML="<H1>" + Number(streak) + "</H1>";
+        document.getElementById("Streak").innerHTML="<H3>" + Number(streak) + "</H3>";
         var now = new Date();
         var elapsed = now - startDate;
         var seconds = Math.round(elapsed / 1000);
-        document.getElementById("TimePerAnswer").innerHTML="<H1>" + Number(Math.round(100*seconds/streak)/100) + "</H1>";
+        document.getElementById("TimePerAnswer").innerHTML="<H3>" + Number(Math.round(100*seconds/streak)/100) + "</H3>";
         GenerateNewQuestion();
     } else {        
         counter=0;
         startDate = new Date();
     }
-    document.getElementById("Counter").innerHTML="<H1>" + Number(counter) + "</H1>";
+    document.getElementById("Counter").innerHTML="<H3>" + Number(counter) + "</H3>";
     document.getElementById("Answer").value="";
     return false;
   }
@@ -101,9 +101,9 @@ function loop()
   var elapsed = now - startDate;
   var seconds = Math.round(elapsed / 1000);
   if(seconds==1) {
-    document.getElementById("Elapsed").innerHTML="<H1>" + Number(seconds) + " second</H1>";
+    document.getElementById("Elapsed").innerHTML="<H3>" + Number(seconds) + " second</H3>";
   } else {
-    document.getElementById("Elapsed").innerHTML="<H1>" + Number(seconds) + " seconds</H1>";
+    document.getElementById("Elapsed").innerHTML="<H3>" + Number(seconds) + " seconds</H3>";
   }
   setTimeout(loop,100);
 }
