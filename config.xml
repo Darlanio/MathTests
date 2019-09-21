@@ -6,7 +6,7 @@
         id        = "com.phonegap.mathtest"
         version   = "1.0.0">
 
-    <name>Tic Tac Toe vs AI</name>
+    <name>Math Tests</name>
 
     <description>
         Practice Your Math Skills
