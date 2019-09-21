@@ -1,0 +1,121 @@
+<HTML>
+  <BODY>
+  <HR>
+    <CENTER>
+      <H1>
+        Multiplikation
+      </H1>
+    </CENTER>
+  <HR>
+    <CENTER>
+      <TABLE>
+        <TR>
+          <TD><H1>Time Elapsed with only correct answers: </H1></TD>
+          <TD ID="Elapsed"><H1>0 seconds</H1></TD>
+        </TR>
+        <TR>
+          <TD><H1>Correct answers in a row: </H1></TD>
+          <TD ID="Counter"><H1>0</H1></TD>
+        </TR>
+        <TR>
+            <TD><H1>Best streak: </H1></TD>
+            <TD ID="Streak"><H1>0</H1></TD>
+        </TR>
+        <TR>
+            <TD><H1>Time per answer: </H1></TD>
+            <TD ID="TimePerAnswer"><H1>0</H1></TD>
+        </TR>              
+      </TABLE>
+    </CENTER>
+  <HR>
+    <CENTER>
+    <FORM action="multiplikation.html">
+      <INPUT Id="Solution" TYPE="Hidden" VALUE="40">
+      <TABLE>
+        <TR>
+          <TD ID="A">
+            <H1>8</H1>
+          </TD>
+          <TD ID="X">
+            <H1>x</H1>
+          </TD>
+          <TD ID="B">
+            <H1>5</H1>
+          </TD>
+          <TD ID="EqualSign">
+            <H1>=</H1>
+          </TD>
+          <TD>
+            <H1>
+              <INPUT Id="Answer" name="Answer" TYPE="number" autocomplete="off" VALUE="" onkeypress="return OnKeyPress(event)">
+            </H1>
+          </TD>
+        </TR>
+      </TABLE>
+    </FORM>
+  </BODY>
+</HTML>
+<script>
+var startDate = new Date();
+var counter=0;
+var streak=0;
+var timeperanswer=0.0;
+
+function GenerateNewQuestion()
+{
+  var a=Math.floor(Math.random() * 13);
+  var b=Math.floor(Math.random() * 13);
+  var solution = a * b;
+
+  document.getElementById("A").innerHTML="<H1>" + Number(a) + "</H1>";
+  document.getElementById("B").innerHTML="<H1>" + Number(b) + "</H1>";
+  document.getElementById("Solution").value=solution;
+}
+
+function OnKeyPress(e)
+{
+  if(e.keyCode==13) {
+    if(Number(document.getElementById("Answer").value)==Number(document.getElementById("Solution").value))
+    {
+        counter++;
+        if(streak<counter) streak=counter;
+        document.getElementById("Streak").innerHTML="<H1>" + Number(streak) + "</H1>";
+        var now = new Date();
+        var elapsed = now - startDate;
+        var seconds = Math.round(elapsed / 1000);
+        document.getElementById("TimePerAnswer").innerHTML="<H1>" + Number(Math.round(100*seconds/streak)/100) + "</H1>";
+        GenerateNewQuestion();
+    } else {        
+        counter=0;
+        startDate = new Date();
+    }
+    document.getElementById("Counter").innerHTML="<H1>" + Number(counter) + "</H1>";
+    document.getElementById("Answer").value="";
+    return false;
+  }
+}
+
+function loop()
+{
+  var now = new Date();
+  var elapsed = now - startDate;
+  var seconds = Math.round(elapsed / 1000);
+  if(seconds==1) {
+    document.getElementById("Elapsed").innerHTML="<H1>" + Number(seconds) + " second</H1>";
+  } else {
+    document.getElementById("Elapsed").innerHTML="<H1>" + Number(seconds) + " seconds</H1>";
+  }
+  setTimeout(loop,100);
+}
+
+function main()
+{
+  startDate = new Date();
+  document.getElementById("Answer").style.fontSize="24pt";
+  document.getElementById("Answer").focus();
+  setTimeout(loop,100);
+}
+
+GenerateNewQuestion();
+setTimeout(main,100);
+</script>
