@@ -3,29 +3,33 @@
   <HR>
     <CENTER>
       <H1>
-        Multiplication
+        Multiplikation
       </H1>
-	  (other test will be added later)
     </CENTER>
   <HR>
     <CENTER>
       <TABLE>
         <TR>
-          <TD><H1>Time Elapsed: </H1></TD>
+          <TD><H1>Time Elapsed with only correct answers: </H1></TD>
           <TD ID="Elapsed"><H1>0 seconds</H1></TD>
+        </TR>
         <TR>
-        <TR>
-          <TD><H1>Correct answers: </H1></TD>
+          <TD><H1>Correct answers in a row: </H1></TD>
           <TD ID="Counter"><H1>0</H1></TD>
+        </TR>
         <TR>
+            <TD><H1>Best streak: </H1></TD>
+            <TD ID="Streak"><H1>0</H1></TD>
+        </TR>
         <TR>
-          <TD COLSPAN="2">Both reset to 0 on incorrect answers.</TD>
-        <TR>		
+            <TD><H1>Time per answer: </H1></TD>
+            <TD ID="TimePerAnswer"><H1>0</H1></TD>
+        </TR>              
       </TABLE>
     </CENTER>
   <HR>
     <CENTER>
-    <FORM action="mathtest.html">
+    <FORM action="multiplikation.html">
       <INPUT Id="Solution" TYPE="Hidden" VALUE="40">
       <TABLE>
         <TR>
@@ -54,6 +58,8 @@
 <script>
 var startDate = new Date();
 var counter=0;
+var streak=0;
+var timeperanswer=0.0;
 
 function GenerateNewQuestion()
 {
@@ -72,6 +78,12 @@ function OnKeyPress(e)
     if(Number(document.getElementById("Answer").value)==Number(document.getElementById("Solution").value))
     {
         counter++;
+        if(streak<counter) streak=counter;
+        document.getElementById("Streak").innerHTML="<H1>" + Number(streak) + "</H1>";
+        var now = new Date();
+        var elapsed = now - startDate;
+        var seconds = Math.round(elapsed / 1000);
+        document.getElementById("TimePerAnswer").innerHTML="<H1>" + Number(Math.round(100*seconds/streak)/100) + "</H1>";
         GenerateNewQuestion();
     } else {        
         counter=0;
@@ -99,8 +111,7 @@ function loop()
 function main()
 {
   startDate = new Date();
-  document.getElementById("Answer").style.fontSize="20pt";
-  document.getElementById("Answer").style.width="200pt";  
+  document.getElementById("Answer").style.fontSize="24pt";
   document.getElementById("Answer").focus();
   setTimeout(loop,100);
 }
